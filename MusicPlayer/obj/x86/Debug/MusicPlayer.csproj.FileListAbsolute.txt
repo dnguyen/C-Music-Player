@@ -1,0 +1,16 @@
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\Interop.WMPLib.dll
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\AxInterop.WMPLib.dll
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\MusicPlayer.csproj.ResolveComReference.cache
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\MusicPlayer.exe
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\MusicPlayer.pdb
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\Interop.WMPLib.dll
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\AxInterop.WMPLib.dll
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\ResolveAssemblyReference.cache
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\Music.frmMain.resources
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\Music.frmNewFolder.resources
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\Music.Properties.Resources.resources
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\Music.Settings.resources
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\GenerateResource.read.1.tlog
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\GenerateResource.write.1.tlog
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\MusicPlayer.exe
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\MusicPlayer.pdb
