@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Music
 {
-    class Song
+    public class Song
     {
         private string path;
         private string title;

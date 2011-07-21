@@ -54,13 +54,15 @@
             this.colTitle,
             this.colArtist,
             this.colPath});
+            this.listMusic.FullRowSelect = true;
             this.listMusic.GridLines = true;
             this.listMusic.Location = new System.Drawing.Point(12, 42);
             this.listMusic.Name = "listMusic";
-            this.listMusic.Size = new System.Drawing.Size(548, 193);
+            this.listMusic.Size = new System.Drawing.Size(573, 193);
             this.listMusic.TabIndex = 2;
             this.listMusic.UseCompatibleStateImageBehavior = false;
             this.listMusic.View = System.Windows.Forms.View.Details;
+            this.listMusic.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listMusic_MouseDoubleClick);
             // 
             // colTitle
             // 
@@ -79,7 +81,7 @@
             // 
             // btnSettings
             // 
-            this.btnSettings.Location = new System.Drawing.Point(485, 12);
+            this.btnSettings.Location = new System.Drawing.Point(510, 12);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(75, 23);
             this.btnSettings.TabIndex = 3;
@@ -91,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 245);
+            this.ClientSize = new System.Drawing.Size(597, 245);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.listMusic);
             this.Controls.Add(this.player);
@@ -108,8 +110,8 @@
         private System.Windows.Forms.ListView listMusic;
         private System.Windows.Forms.ColumnHeader colTitle;
         private System.Windows.Forms.ColumnHeader colArtist;
-        private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.ColumnHeader colPath;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
 

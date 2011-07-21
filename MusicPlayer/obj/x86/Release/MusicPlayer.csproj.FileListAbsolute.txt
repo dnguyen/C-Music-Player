@@ -14,3 +14,6 @@ G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\GenerateR
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\GenerateResource.write.1.tlog
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\MusicPlayer.exe
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\MusicPlayer.pdb
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Release\policy.2.0.taglib-sharp.dll
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Release\taglib-sharp.dll
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Release\policy.2.0.taglib-sharp.config
