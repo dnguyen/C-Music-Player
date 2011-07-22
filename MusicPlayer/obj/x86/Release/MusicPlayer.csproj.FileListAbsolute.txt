@@ -7,7 +7,6 @@ G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\Interop.W
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\AxInterop.WMPLib.dll
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\MusicPlayer.csproj.ResolveComReference.cache
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\Music.frmMain.resources
-G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\Music.frmNewFolder.resources
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\Music.Properties.Resources.resources
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\Music.Settings.resources
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\GenerateResource.read.1.tlog

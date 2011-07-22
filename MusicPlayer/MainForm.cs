@@ -14,7 +14,7 @@ namespace Music
 {
     public partial class frmMain : Form
     {
-        public static List<string> currentFolders;
+        public List<string> currentFolders;
         public List<Song> listSongs;
 
         Settings settingsForm;
@@ -22,13 +22,15 @@ namespace Music
         public frmMain()
         {
             InitializeComponent();
+
             currentFolders = new List<string>();
             listSongs = new List<Song>();
+
             // Check if the the settings file exists
-            if (System.IO.File.Exists("settings.xml"))
+            if (System.IO.File.Exists("settings.mpc"))
             {
                 XmlDocument settingsXml = new XmlDocument();
-                settingsXml.Load("settings.xml");
+                settingsXml.Load("settings.mpc");
 
                 // Load settings when the form loads
                 // Load the current library folders
@@ -47,7 +49,7 @@ namespace Music
                 MessageBox.Show("Settings file was not found. Creating one now.", "Error", MessageBoxButtons.OK); 
             }
 
-            // Fill in the listview with all music files after done loading the current folders
+            // Fill in the listview with all music files after loading the current folders
             if (currentFolders.Count > 0)
             {
                 int count = 0;
@@ -57,15 +59,23 @@ namespace Music
                     
                     foreach (string musicFile in musicFiles)
                     {
-                        TagLib.File mFile = TagLib.File.Create(musicFile);
-                        Song songFile = new Song(musicFile, mFile.Tag.FirstAlbumArtist, mFile.Tag.Title);
+                        if (Path.GetExtension(musicFile) == ".mp3" || Path.GetExtension(musicFile) == ".wmv")
+                        {
+                            TagLib.File mFile = TagLib.File.Create(musicFile);
+                            Song songFile = new Song(musicFile, mFile.Tag.FirstAlbumArtist, mFile.Tag.Title);
 
-                        listSongs.Add(songFile);
-                        listMusic.Items.Add(songFile.Artist);
-                        listMusic.Items[count].SubItems.Add(songFile.Title);
-                        listMusic.Items[count].SubItems.Add(songFile.Path);
+                            listSongs.Add(songFile);
+                            listMusic.Items.Add(songFile.Artist);
+                            listMusic.Items[count].SubItems.Add(songFile.Title);
+                            listMusic.Items[count].SubItems.Add(songFile.Path);
 
-                        count++;
+                            count++;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error: " + Path.GetExtension(musicFile));
+                            Console.WriteLine("Invalid file: " + musicFile);
+                        }
                     }
 
                 }
@@ -86,6 +96,8 @@ namespace Music
         {
             player.URL = listSongs[listMusic.SelectedIndices[0]].Path;
         }
+
+
 
     }
 }
