@@ -62,12 +62,12 @@ namespace Music
                         if (Path.GetExtension(musicFile) == ".mp3" || Path.GetExtension(musicFile) == ".wmv")
                         {
                             TagLib.File mFile = TagLib.File.Create(musicFile);
-                            Song songFile = new Song(musicFile, mFile.Tag.FirstAlbumArtist, mFile.Tag.Title);
+                            Song songFile = new Song(musicFile, mFile.Tag.Title, mFile.Tag.FirstAlbumArtist, mFile.Tag.Album);
 
                             listSongs.Add(songFile);
-                            listMusic.Items.Add(songFile.Artist);
-                            listMusic.Items[count].SubItems.Add(songFile.Title);
-                            listMusic.Items[count].SubItems.Add(songFile.Path);
+                            listMusic.Items.Add(songFile.Title);
+                            listMusic.Items[count].SubItems.Add(songFile.Artist);
+                            listMusic.Items[count].SubItems.Add(songFile.Album);
 
                             count++;
                         }
@@ -86,18 +86,16 @@ namespace Music
             }
         }
 
-        private void btnSettings_Click(object sender, EventArgs e)
+        private void listMusic_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            player.URL = listSongs[listMusic.SelectedIndices[0]].Path;
+            lblCurrentSong.Text = listSongs[listMusic.SelectedIndices[0]].Title + " - " + listSongs[listMusic.SelectedIndices[0]].Artist;
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             settingsForm = new Settings();
             settingsForm.Show();
         }
-
-        private void listMusic_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            player.URL = listSongs[listMusic.SelectedIndices[0]].Path;
-        }
-
-
-
     }
 }

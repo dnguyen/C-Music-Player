@@ -46,27 +46,34 @@ namespace Music
         {
             newFolderBrowser.ShowDialog();
             string selectedPath = newFolderBrowser.SelectedPath;
-            listCurrentFolders.Items.Add(selectedPath);
-
-            // Write new folder to XML settings file
-            try
+            if (Directory.Exists(selectedPath))
             {
-                XmlDocument settingsXml = new XmlDocument();
-                settingsXml.Load("settings.xml");
+                listCurrentFolders.Items.Add(selectedPath);
 
-                XmlNode root = settingsXml.DocumentElement;
+                // Write new folder to XML settings file
+                try
+                {
+                    XmlDocument settingsXml = new XmlDocument();
+                    settingsXml.Load("settings.mpc");
 
-                XmlElement libraryelem = settingsXml.CreateElement("folder");
-                libraryelem.InnerText = selectedPath;
+                    XmlNode root = settingsXml.DocumentElement;
 
-                root.InsertAfter(libraryelem, root.FirstChild);
+                    XmlElement libraryelem = settingsXml.CreateElement("folder");
+                    libraryelem.InnerText = selectedPath;
 
-                settingsXml.Save("settings.xml");
+                    root.InsertAfter(libraryelem, root.FirstChild);
 
+                    settingsXml.Save("settings.mpc");
+
+                }
+                catch (XmlException xe)
+                {
+                    Console.WriteLine(xe.ToString());
+                }
             }
-            catch (XmlException xe)
+            else
             {
-                Console.WriteLine(xe.ToString());
+                MessageBox.Show("Invalid folder path", "Error", MessageBoxButtons.OK);
             }
         }
     }
