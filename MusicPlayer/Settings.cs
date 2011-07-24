@@ -97,5 +97,37 @@ namespace Music
                 }
             }
         }
+
+        private void btnDeleteFolder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                XmlDocument settingsXml = new XmlDocument();
+                settingsXml.Load("settings.mpc");
+                XmlNode rootNode = settingsXml.DocumentElement;
+
+                XmlNodeList folders = settingsXml.GetElementsByTagName("folder");
+                XmlNode nodeToBeRemoved = null;
+
+                foreach (XmlNode node in folders)
+                {
+                    if (node.InnerText == listCurrentFolders.SelectedItems[0].Text)
+                    {
+                        nodeToBeRemoved = node;
+                        listCurrentFolders.Items.RemoveAt(listCurrentFolders.SelectedItems[0].Index);
+                        break;
+                    }
+                }
+
+                rootNode.RemoveChild(nodeToBeRemoved);
+                settingsXml.Save("settings.mpc");
+
+                settingsChanged = true;
+            }
+            catch (XmlException xe)
+            {
+                Console.WriteLine(xe.ToString());
+            }
+        }
     }
 }

@@ -81,6 +81,7 @@
             this.btnDeleteFolder.TabIndex = 1;
             this.btnDeleteFolder.Text = "Delete Folder";
             this.btnDeleteFolder.UseVisualStyleBackColor = true;
+            this.btnDeleteFolder.Click += new System.EventHandler(this.btnDeleteFolder_Click);
             // 
             // listCurrentFolders
             // 

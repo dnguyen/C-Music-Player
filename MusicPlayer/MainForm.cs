@@ -40,8 +40,6 @@ namespace Music
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-
             settingsForm = new Settings();
             settingsForm.SettingsChanged += new Settings.SettingsChangedHandler(SettingsHaveChanged);
             settingsForm.Show();
