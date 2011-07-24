@@ -31,11 +31,11 @@
             this.tabSettings = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnNewFolder = new System.Windows.Forms.Button();
+            this.btnDeleteFolder = new System.Windows.Forms.Button();
             this.listCurrentFolders = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnNewFolder = new System.Windows.Forms.Button();
             this.newFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
-            this.btnDeleteFolder = new System.Windows.Forms.Button();
             this.tabSettings.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
@@ -73,15 +73,14 @@
             this.tabPage2.Text = "Library";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnNewFolder
+            // btnDeleteFolder
             // 
-            this.btnNewFolder.Location = new System.Drawing.Point(283, 6);
-            this.btnNewFolder.Name = "btnNewFolder";
-            this.btnNewFolder.Size = new System.Drawing.Size(142, 23);
-            this.btnNewFolder.TabIndex = 1;
-            this.btnNewFolder.Text = "Add New Folder";
-            this.btnNewFolder.UseVisualStyleBackColor = true;
-            this.btnNewFolder.Click += new System.EventHandler(this.btnNewFolder_Click);
+            this.btnDeleteFolder.Location = new System.Drawing.Point(283, 35);
+            this.btnDeleteFolder.Name = "btnDeleteFolder";
+            this.btnDeleteFolder.Size = new System.Drawing.Size(142, 23);
+            this.btnDeleteFolder.TabIndex = 1;
+            this.btnDeleteFolder.Text = "Delete Folder";
+            this.btnDeleteFolder.UseVisualStyleBackColor = true;
             // 
             // listCurrentFolders
             // 
@@ -103,14 +102,15 @@
             this.columnHeader1.Text = "Folder Path";
             this.columnHeader1.Width = 265;
             // 
-            // btnDeleteFolder
+            // btnNewFolder
             // 
-            this.btnDeleteFolder.Location = new System.Drawing.Point(283, 35);
-            this.btnDeleteFolder.Name = "btnDeleteFolder";
-            this.btnDeleteFolder.Size = new System.Drawing.Size(142, 23);
-            this.btnDeleteFolder.TabIndex = 1;
-            this.btnDeleteFolder.Text = "Delete Folder";
-            this.btnDeleteFolder.UseVisualStyleBackColor = true;
+            this.btnNewFolder.Location = new System.Drawing.Point(283, 6);
+            this.btnNewFolder.Name = "btnNewFolder";
+            this.btnNewFolder.Size = new System.Drawing.Size(142, 23);
+            this.btnNewFolder.TabIndex = 1;
+            this.btnNewFolder.Text = "Add New Folder";
+            this.btnNewFolder.UseVisualStyleBackColor = true;
+            this.btnNewFolder.Click += new System.EventHandler(this.btnNewFolder_Click);
             // 
             // Settings
             // 
@@ -120,6 +120,7 @@
             this.Controls.Add(this.tabSettings);
             this.Name = "Settings";
             this.Text = "Settings";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Settings_FormClosed);
             this.tabSettings.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);

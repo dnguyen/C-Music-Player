@@ -19,6 +19,7 @@ namespace Music
 
         Settings settingsForm;
 
+
         public frmMain()
         {
             InitializeComponent();
@@ -26,6 +27,37 @@ namespace Music
             currentFolders = new List<string>();
             listSongs = new List<Song>();
 
+            LoadCurrentFolders();
+            LoadSongs();
+
+        }
+
+        private void listMusic_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            player.URL = listSongs[listMusic.SelectedIndices[0]].Path;
+            lblCurrentSong.Text = listSongs[listMusic.SelectedIndices[0]].Title + " - " + listSongs[listMusic.SelectedIndices[0]].Artist;
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+
+            settingsForm = new Settings();
+            settingsForm.SettingsChanged += new Settings.SettingsChangedHandler(SettingsHaveChanged);
+            settingsForm.Show();
+        }
+
+        public void SettingsHaveChanged(object sender, EventArgs e)
+        {
+            listMusic.Items.Clear();
+            listSongs.Clear();
+            currentFolders.Clear();
+            LoadCurrentFolders();
+            LoadSongs();
+        }
+
+        private void LoadCurrentFolders()
+        {
             // Check if the the settings file exists
             if (System.IO.File.Exists("settings.mpc"))
             {
@@ -46,9 +78,12 @@ namespace Music
             }
             else
             {
-                MessageBox.Show("Settings file was not found. Creating one now.", "Error", MessageBoxButtons.OK); 
+                MessageBox.Show("Settings file was not found. Creating one now.", "Error", MessageBoxButtons.OK);
             }
+        }
 
+        private void LoadSongs()
+        {            
             // Fill in the listview with all music files after loading the current folders
             if (currentFolders.Count > 0)
             {
@@ -56,7 +91,7 @@ namespace Music
                 foreach (string fPath in currentFolders)
                 {
                     string[] musicFiles = Directory.GetFiles(fPath);
-                    
+
                     foreach (string musicFile in musicFiles)
                     {
                         if (Path.GetExtension(musicFile) == ".mp3" || Path.GetExtension(musicFile) == ".wmv")
@@ -84,18 +119,6 @@ namespace Music
             {
                 Console.WriteLine("Current folders count <= 0");
             }
-        }
-
-        private void listMusic_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            player.URL = listSongs[listMusic.SelectedIndices[0]].Path;
-            lblCurrentSong.Text = listSongs[listMusic.SelectedIndices[0]].Title + " - " + listSongs[listMusic.SelectedIndices[0]].Artist;
-        }
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settingsForm = new Settings();
-            settingsForm.Show();
         }
     }
 }

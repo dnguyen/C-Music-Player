@@ -13,10 +13,17 @@ namespace Music
 {
     public partial class Settings : Form
     {
+        bool settingsChanged = false;
+
+        public delegate void SettingsChangedHandler(object sender, EventArgs data);
+        public event SettingsChangedHandler SettingsChanged;
+
 
         public Settings()
         {
             InitializeComponent();
+
+            settingsChanged = false;
 
             // Check if the the settings file exists
             if (System.IO.File.Exists("settings.mpc"))
@@ -64,6 +71,7 @@ namespace Music
                     root.InsertAfter(libraryelem, root.FirstChild);
 
                     settingsXml.Save("settings.mpc");
+                    settingsChanged = true;
 
                 }
                 catch (XmlException xe)
@@ -74,6 +82,19 @@ namespace Music
             else
             {
                 MessageBox.Show("Invalid folder path", "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        private void Settings_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            if (settingsChanged) // Do not want to reload the main form if we don't need to.
+            {
+                // Trigger main form event
+                if (SettingsChanged != null)
+                {
+                    SettingsChanged(this, e);
+                }
             }
         }
     }
