@@ -8,7 +8,6 @@ G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\AxInterop.WMPLi
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\ResolveAssemblyReference.cache
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\Music.frmMain.resources
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\Music.Properties.Resources.resources
-G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\Music.Settings.resources
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\GenerateResource.read.1.tlog
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\GenerateResource.write.1.tlog
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\MusicPlayer.exe
@@ -16,3 +15,4 @@ G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\MusicPlayer
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\policy.2.0.taglib-sharp.dll
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\taglib-sharp.dll
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\policy.2.0.taglib-sharp.config
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\Music.SettingsForm.resources
