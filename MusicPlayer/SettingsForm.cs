@@ -224,7 +224,7 @@ namespace Music
         }
     }
 
-    public class SettingsEventArgs : EventArgs
+    /*public class SettingsEventArgs : EventArgs
     {
         public List<string> addedFolders { get; internal set; }
         public List<string> removedFolders { get; internal set; }
@@ -234,5 +234,5 @@ namespace Music
             this.addedFolders = addedFolders;
             this.removedFolders = removedFolders;
         }
-    }
+    }*/
 }

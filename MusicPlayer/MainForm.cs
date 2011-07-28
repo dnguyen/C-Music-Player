@@ -19,9 +19,9 @@ namespace Music
 {
     public partial class frmMain : Form
     {
-        public List<Dictionary<string, List<Song>>> cFolders; // Holds ALL the folders of music
+        /*public List<Dictionary<string, List<Song>>> cFolders; // Holds ALL the folders of music
         // Dictionary key - folderpath, value - music files within that folder
-        public Dictionary<string, List<Song>> MusicFolder; // Just ONE folder of music
+        public Dictionary<string, List<Song>> MusicFolder; // Just ONE folder of music*/
 
         public List<string> currentFolders;
         public List<Song> listSongs;
