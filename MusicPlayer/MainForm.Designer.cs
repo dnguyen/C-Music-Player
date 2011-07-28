@@ -60,9 +60,11 @@
             this.contextSong = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openYouTubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblSongDuration = new System.Windows.Forms.Label();
+            this.imgAlbumArt = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.contextSong.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgAlbumArt)).BeginInit();
             this.SuspendLayout();
             // 
             // player
@@ -84,7 +86,7 @@
             this.listMusic.ContextMenuStrip = this.contextSong;
             this.listMusic.FullRowSelect = true;
             this.listMusic.GridLines = true;
-            this.listMusic.Location = new System.Drawing.Point(12, 132);
+            this.listMusic.Location = new System.Drawing.Point(12, 152);
             this.listMusic.MultiSelect = false;
             this.listMusic.Name = "listMusic";
             this.listMusic.Size = new System.Drawing.Size(573, 193);
@@ -111,7 +113,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 41);
+            this.label1.Location = new System.Drawing.Point(92, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 13);
             this.label1.TabIndex = 4;
@@ -120,7 +122,7 @@
             // lblCurrentSong
             // 
             this.lblCurrentSong.AutoSize = true;
-            this.lblCurrentSong.Location = new System.Drawing.Point(101, 41);
+            this.lblCurrentSong.Location = new System.Drawing.Point(181, 49);
             this.lblCurrentSong.Name = "lblCurrentSong";
             this.lblCurrentSong.Size = new System.Drawing.Size(0, 13);
             this.lblCurrentSong.TabIndex = 5;
@@ -182,31 +184,33 @@
             // playToolStripMenuItem
             // 
             this.playToolStripMenuItem.Name = "playToolStripMenuItem";
-            this.playToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.playToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.playToolStripMenuItem.Text = "Play";
+            this.playToolStripMenuItem.Click += new System.EventHandler(this.playToolStripMenuItem_Click);
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.stopToolStripMenuItem.Text = "Stop";
+            this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
             // pauseToolStripMenuItem
             // 
             this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pauseToolStripMenuItem.Text = "Pause";
             // 
             // nextToolStripMenuItem
             // 
             this.nextToolStripMenuItem.Name = "nextToolStripMenuItem";
-            this.nextToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.nextToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nextToolStripMenuItem.Text = "Next";
             // 
             // previousToolStripMenuItem
             // 
             this.previousToolStripMenuItem.Name = "previousToolStripMenuItem";
-            this.previousToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.previousToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.previousToolStripMenuItem.Text = "Previous";
             // 
             // optionsToolStripMenuItem
@@ -226,14 +230,14 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(12, 106);
+            this.txtSearch.Location = new System.Drawing.Point(12, 126);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(151, 20);
             this.txtSearch.TabIndex = 9;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(169, 104);
+            this.btnSearch.Location = new System.Drawing.Point(169, 124);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(73, 23);
             this.btnSearch.TabIndex = 10;
@@ -243,7 +247,7 @@
             // 
             // btnCloseSearch
             // 
-            this.btnCloseSearch.Location = new System.Drawing.Point(248, 104);
+            this.btnCloseSearch.Location = new System.Drawing.Point(248, 124);
             this.btnCloseSearch.Name = "btnCloseSearch";
             this.btnCloseSearch.Size = new System.Drawing.Size(24, 23);
             this.btnCloseSearch.TabIndex = 11;
@@ -254,9 +258,9 @@
             // 
             // songDuration
             // 
-            this.songDuration.Location = new System.Drawing.Point(15, 70);
+            this.songDuration.Location = new System.Drawing.Point(95, 78);
             this.songDuration.Name = "songDuration";
-            this.songDuration.Size = new System.Drawing.Size(570, 13);
+            this.songDuration.Size = new System.Drawing.Size(490, 13);
             this.songDuration.TabIndex = 12;
             // 
             // timerSongDuration
@@ -299,21 +303,33 @@
             this.lblSongDuration.Size = new System.Drawing.Size(0, 13);
             this.lblSongDuration.TabIndex = 14;
             // 
+            // imgAlbumArt
+            // 
+            this.imgAlbumArt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgAlbumArt.Image = ((System.Drawing.Image)(resources.GetObject("imgAlbumArt.Image")));
+            this.imgAlbumArt.InitialImage = null;
+            this.imgAlbumArt.Location = new System.Drawing.Point(12, 41);
+            this.imgAlbumArt.Name = "imgAlbumArt";
+            this.imgAlbumArt.Size = new System.Drawing.Size(64, 64);
+            this.imgAlbumArt.TabIndex = 15;
+            this.imgAlbumArt.TabStop = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 337);
-            this.Controls.Add(this.songDuration);
+            this.ClientSize = new System.Drawing.Size(597, 357);
             this.Controls.Add(this.lblSongDuration);
+            this.Controls.Add(this.imgAlbumArt);
+            this.Controls.Add(this.player);
+            this.Controls.Add(this.songDuration);
             this.Controls.Add(this.btnCloseSearch);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.listMusic);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.lblCurrentSong);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.player);
-            this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "Music Player";
@@ -322,6 +338,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextSong.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imgAlbumArt)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -359,6 +376,7 @@
         private System.Windows.Forms.ToolStripMenuItem editPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openYouTubeToolStripMenuItem;
         private System.Windows.Forms.Label lblSongDuration;
+        private System.Windows.Forms.PictureBox imgAlbumArt;
     }
 }
 

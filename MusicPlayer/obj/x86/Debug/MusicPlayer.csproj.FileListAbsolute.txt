@@ -16,3 +16,4 @@ G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\policy.2.0.tagl
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\taglib-sharp.dll
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\policy.2.0.taglib-sharp.config
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Debug\Music.SettingsForm.resources
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Debug\MusicPlayer.exe.config

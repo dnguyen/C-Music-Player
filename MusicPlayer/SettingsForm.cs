@@ -35,6 +35,34 @@ namespace Music
                 // Load settings when the form loads
                 // Load the current library folders
                 XmlNodeList cFoldersNodes = settingsXml.GetElementsByTagName("folder");
+
+                // Check for Last.FM scrobbling
+                XmlNode scrobblingNode = settingsXml.GetElementsByTagName("scrobble")[0];
+                XmlNodeList scrobblingChildren = scrobblingNode.ChildNodes;
+
+                foreach (XmlNode node in scrobblingChildren)
+                {
+                    if (node.Name == "enabled")
+                    {
+                        if (node.InnerText == "true")
+                        {
+                            chkEnableScrobbling.Checked = true;
+                            txtUserName.ReadOnly = false;
+                            txtPassword.ReadOnly = false;
+                        }
+                        else
+                        {
+                            chkEnableScrobbling.Checked = false;
+                            txtUserName.ReadOnly = true;
+                            txtPassword.ReadOnly = true;
+                        }
+                    }
+                    if (node.Name == "username")
+                        txtUserName.Text = node.InnerText;
+                    else if (node.Name == "password")
+                        txtPassword.Text = node.InnerText;
+                }
+
                 foreach (XmlNode node in cFoldersNodes)
                 {
                     // Only add folders that exist
@@ -96,6 +124,37 @@ namespace Music
                 {
                     SettingsChanged(this, e);
                 }
+
+                try
+                {
+                    // Save xml settings
+                    XmlDocument settingsXml = new XmlDocument();
+                    settingsXml.Load("settings.mpc");
+
+                    if (chkEnableScrobbling.Checked)
+                    {
+                        XmlNode sNode = settingsXml.GetElementsByTagName("enabled")[0];
+                        sNode.InnerText = "true";
+                    }
+                    else
+                    {
+                        XmlNode sNode = settingsXml.GetElementsByTagName("enabled")[0];
+                        sNode.InnerText = "false";
+                    }
+
+                    XmlNode userNode = settingsXml.GetElementsByTagName("username")[0];
+                    XmlNode pwNode = settingsXml.GetElementsByTagName("password")[0];
+
+                    userNode.InnerText = txtUserName.Text;
+                    pwNode.InnerText = txtPassword.Text;
+
+                    settingsXml.Save("settings.mpc");
+                }
+                catch (XmlException xe)
+                {
+                    Console.WriteLine(xe.ToString());
+                }
+
             }
         }
 
@@ -137,6 +196,31 @@ namespace Music
             {
                 MessageBox.Show("Please select a folder to delete", "Error", MessageBoxButtons.OK);
             }
+        }
+
+        private void chkEnableScrobbling_CheckedChanged(object sender, EventArgs e)
+        {
+            settingsChanged = true;
+            if (chkEnableScrobbling.Checked)
+            {
+                txtUserName.ReadOnly = false;
+                txtPassword.ReadOnly = false;
+            }
+            else
+            {
+                txtUserName.ReadOnly = true;
+                txtPassword.ReadOnly = true;
+            }
+        }
+
+        private void txtUserName_TextChanged(object sender, EventArgs e)
+        {
+            settingsChanged = true;
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            settingsChanged = true;
         }
     }
 

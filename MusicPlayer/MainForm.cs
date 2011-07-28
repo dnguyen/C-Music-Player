@@ -8,7 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+using Lastfm;
 using TagLib;
+
+using System.Net;
+using Lastfm.Services;
+using Lastfm.Scrobbling;
 
 namespace Music
 {
@@ -23,7 +28,14 @@ namespace Music
 
         SettingsForm settingsForm;
 
+        bool scrobblingEnabled = false;
         bool doneLoadingSong = false;
+
+        string LFMAPI_KEY = "d79f4d7f16bc620937bb85a627e4d09f";
+        string LFMAPI_SECRET = "d51b8832bf327d074f1834bde8ed17b3";
+
+        ScrobbleManager scrobbleManager;
+        Session session;
 
         public frmMain()
         {
@@ -34,7 +46,7 @@ namespace Music
 
             LoadCurrentFolders();
             LoadSongs();
-
+            LoadSettings();
             player.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(myPlayer_PlayStateChange);
             
         }
@@ -42,8 +54,7 @@ namespace Music
         private void listMusic_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             PlaySong(listSongs[listMusic.SelectedIndices[0]].Path);
-            timerSongDuration.Enabled = true;
-            doneLoadingSong = true;
+            
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -63,14 +74,14 @@ namespace Music
             currentFolders.Clear();
             LoadCurrentFolders();
             LoadSongs();
+            LoadSettings();
         }
-
-
 
         private void frmMain_Resize(object sender, EventArgs e)
         {
             listMusic.Width = this.Width - 40;
-            listMusic.Height = this.Height - 180;
+            listMusic.Height = this.Height - 200;
+            songDuration.Width = this.Width - 122;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -131,12 +142,78 @@ namespace Music
             PlaySong(listSongs[listMusic.SelectedIndices[0]].Path);
         }
 
+
+        void myPlayer_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e) {
+            if (doneLoadingSong && e.newState == 3)
+            {
+                songDuration.Maximum = (int)player.currentMedia.duration;
+                lblSongDuration.Text = player.currentMedia.durationString;
+
+                Entry entry = new Entry(
+                    listSongs[listMusic.SelectedIndices[0]].Artist,
+                    listSongs[listMusic.SelectedIndices[0]].Title,
+                    DateTime.Now,
+                    PlaybackSource.NonPersonalizedBroadcast,
+                    TimeSpan.FromSeconds(player.currentMedia.duration),
+                    ScrobbleMode.Played);
+
+                scrobbleManager.Queue(entry);
+
+                doneLoadingSong = false;
+            }
+        }
+
+        private void playToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PlaySong(listSongs[listMusic.SelectedIndices[0]].Path);
+        }
+
+        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            player.Ctlcontrols.stop();
+        }
+
+        #region Form functions (NOT events)
+
         private void PlaySong(string path)
         {
+            // Use last.fm to get the album art
+            string lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=d79f4d7f16bc620937bb85a627e4d09f&artist=" + listSongs[listMusic.SelectedIndices[0]].Artist + "&album=" + listSongs[listMusic.SelectedIndices[0]].Album;
+            try
+            {
+                XmlDocument lastFMXML = new XmlDocument();
+                lastFMXML.Load(lastFMURL);
+
+                XmlNodeList ImageNodes = lastFMXML.GetElementsByTagName("image");
+                foreach (XmlNode node in ImageNodes)
+                {
+                    if (node.Attributes["size"].InnerText == "medium")
+                    {
+                        imgAlbumArt.ImageLocation = node.InnerText;
+                        ///Console.WriteLine(node.Attributes["size"].InnerText);
+                    }
+
+                }
+                
+            }
+            catch (XmlException xe)
+            {
+                Console.WriteLine(xe.ToString());
+            }
+
+            timerSongDuration.Enabled = true;
+            doneLoadingSong = true;
             songDuration.Value = 0;
             player.URL = path;
             lblCurrentSong.Text = listSongs[listMusic.SelectedIndices[0]].Title + " - " + listSongs[listMusic.SelectedIndices[0]].Artist;
             player.Ctlcontrols.play();
+        }
+
+        private void StopSong()
+        {
+            player.Ctlcontrols.stop();
+            timerSongDuration.Stop();
+            songDuration.Value = 0;
         }
 
         private void LoadCurrentFolders()
@@ -205,13 +282,58 @@ namespace Music
             }
         }
 
-        void myPlayer_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e) {
-            if (doneLoadingSong && e.newState == 3)
+        private void LoadSettings()
+        {
+            if (System.IO.File.Exists("settings.mpc"))
             {
-                songDuration.Maximum = (int)player.currentMedia.duration;
-                lblSongDuration.Text = player.currentMedia.durationString;
-                doneLoadingSong = false;
+                try
+                {
+                    XmlDocument settingsXml = new XmlDocument();
+                    settingsXml.Load("settings.mpc");
+
+                    // Check for Last.FM scrobbling
+                    XmlNode scrobblingNode = settingsXml.GetElementsByTagName("scrobble")[0];
+                    XmlNodeList scrobblingChildren = scrobblingNode.ChildNodes;
+                    foreach (XmlNode node in scrobblingChildren)
+                    {
+                        if (node.Name == "enabled")
+                        {
+                            if (node.InnerText == "true")
+                                scrobblingEnabled = true;
+                            else
+                                scrobblingEnabled = false;
+                        }
+                    }
+
+                    // If scrobbling is enabled, authentican with last.fm
+                    if (scrobblingEnabled)
+                    {
+                        // Grab username and password for last.fm auth
+                        session = new Session(LFMAPI_KEY, LFMAPI_SECRET);
+                        string md5Password = Lastfm.Utilities.md5(settingsXml.GetElementsByTagName("password")[0].InnerText);
+
+                        try
+                        {
+                            session.Authenticate(settingsXml.GetElementsByTagName("username")[0].InnerText, md5Password);
+                        } catch {
+                            Console.WriteLine("Failed to authenticate");
+                        }
+
+                        if (session.Authenticated)
+                        {
+                            Connection connection = new Connection("mpc", "1.0", settingsXml.GetElementsByTagName("username")[0].InnerText, session);
+                            scrobbleManager = new ScrobbleManager(connection, "../cache/");
+                            
+                            Console.WriteLine("Authenticated!");
+                        }
+                    }
+                }
+                catch (XmlException xe) {
+                    Console.WriteLine(xe.ToString());
+                }
             }
         }
+
+        #endregion
     }
 }
