@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer", "MusicPlayer\MusicPlayer.csproj", "{3E7F908F-BEE2-4CD3-9B03-DAAE4A6B40FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Youtube to MP3", "D:\Programming\C#\Youtube to MP3\Youtube to MP3\Youtube to MP3.csproj", "{DBE6D4D8-47B7-4F5B-8ED5-67E2652254EE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,10 +13,6 @@ Global
 		{3E7F908F-BEE2-4CD3-9B03-DAAE4A6B40FE}.Debug|x86.Build.0 = Debug|x86
 		{3E7F908F-BEE2-4CD3-9B03-DAAE4A6B40FE}.Release|x86.ActiveCfg = Release|x86
 		{3E7F908F-BEE2-4CD3-9B03-DAAE4A6B40FE}.Release|x86.Build.0 = Release|x86
-		{DBE6D4D8-47B7-4F5B-8ED5-67E2652254EE}.Debug|x86.ActiveCfg = Debug|x86
-		{DBE6D4D8-47B7-4F5B-8ED5-67E2652254EE}.Debug|x86.Build.0 = Debug|x86
-		{DBE6D4D8-47B7-4F5B-8ED5-67E2652254EE}.Release|x86.ActiveCfg = Release|x86
-		{DBE6D4D8-47B7-4F5B-8ED5-67E2652254EE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
