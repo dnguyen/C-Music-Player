@@ -43,6 +43,8 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnNewFolder = new System.Windows.Forms.Button();
             this.newFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            this.label3 = new System.Windows.Forms.Label();
+            this.chkMSN = new System.Windows.Forms.CheckBox();
             this.tabSettings.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -61,7 +63,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chkMSN);
             this.tabPage1.Controls.Add(this.panel1);
+            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -89,7 +93,7 @@
             this.chkEnableScrobbling.Location = new System.Drawing.Point(10, 41);
             this.chkEnableScrobbling.Name = "chkEnableScrobbling";
             this.chkEnableScrobbling.Size = new System.Drawing.Size(112, 17);
-            this.chkEnableScrobbling.TabIndex = 3;
+            this.chkEnableScrobbling.TabIndex = 0;
             this.chkEnableScrobbling.Text = "Enable Scrobbling";
             this.chkEnableScrobbling.UseVisualStyleBackColor = true;
             this.chkEnableScrobbling.CheckedChanged += new System.EventHandler(this.chkEnableScrobbling_CheckedChanged);
@@ -115,10 +119,10 @@
             // lblLastFm
             // 
             this.lblLastFm.AutoSize = true;
-            this.lblLastFm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastFm.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLastFm.Location = new System.Drawing.Point(7, 6);
             this.lblLastFm.Name = "lblLastFm";
-            this.lblLastFm.Size = new System.Drawing.Size(129, 17);
+            this.lblLastFm.Size = new System.Drawing.Size(124, 18);
             this.lblLastFm.TabIndex = 2;
             this.lblLastFm.Text = "Last.FM Scrobbling";
             // 
@@ -128,7 +132,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(132, 20);
-            this.txtPassword.TabIndex = 1;
+            this.txtPassword.TabIndex = 2;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // txtUserName
@@ -192,6 +196,27 @@
             this.btnNewFolder.UseVisualStyleBackColor = true;
             this.btnNewFolder.Click += new System.EventHandler(this.btnNewFolder_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(15, 94);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(167, 18);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Windows Live Messenger";
+            // 
+            // chkMSN
+            // 
+            this.chkMSN.AutoSize = true;
+            this.chkMSN.Location = new System.Drawing.Point(18, 123);
+            this.chkMSN.Name = "chkMSN";
+            this.chkMSN.Size = new System.Drawing.Size(251, 17);
+            this.chkMSN.TabIndex = 0;
+            this.chkMSN.Text = "Show current song in Windows Live Messenger";
+            this.chkMSN.UseVisualStyleBackColor = true;
+            this.chkMSN.CheckedChanged += new System.EventHandler(this.chkMSN_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,6 +231,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Settings_FormClosed);
             this.tabSettings.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -230,5 +256,7 @@
         private System.Windows.Forms.Label lblLastFm;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUserName;
+        private System.Windows.Forms.CheckBox chkMSN;
+        private System.Windows.Forms.Label label3;
     }
 }

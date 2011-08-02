@@ -63,6 +63,16 @@ namespace Music
                         txtPassword.Text = node.InnerText;
                 }
 
+                XmlNode MSNNode = settingsXml.GetElementsByTagName("msnenabled")[0];
+                if (MSNNode.InnerText == "true")
+                {
+                    chkMSN.Checked = true;
+                }
+                else
+                {
+                    chkMSN.Checked = false;
+                }
+
                 foreach (XmlNode node in cFoldersNodes)
                 {
                     // Only add folders that exist
@@ -119,11 +129,6 @@ namespace Music
 
             if (settingsChanged) // Do not want to reload the main form if we don't need to.
             {
-                // Trigger main form event
-                if (SettingsChanged != null)
-                {
-                    SettingsChanged(this, e);
-                }
 
                 try
                 {
@@ -131,16 +136,12 @@ namespace Music
                     XmlDocument settingsXml = new XmlDocument();
                     settingsXml.Load("settings.mpc");
 
+                    XmlNode sNode = settingsXml.GetElementsByTagName("enabled")[0];
+
                     if (chkEnableScrobbling.Checked)
-                    {
-                        XmlNode sNode = settingsXml.GetElementsByTagName("enabled")[0];
                         sNode.InnerText = "true";
-                    }
                     else
-                    {
-                        XmlNode sNode = settingsXml.GetElementsByTagName("enabled")[0];
                         sNode.InnerText = "false";
-                    }
 
                     XmlNode userNode = settingsXml.GetElementsByTagName("username")[0];
                     XmlNode pwNode = settingsXml.GetElementsByTagName("password")[0];
@@ -148,11 +149,23 @@ namespace Music
                     userNode.InnerText = txtUserName.Text;
                     pwNode.InnerText = txtPassword.Text;
 
+                    XmlNode msnNode = settingsXml.GetElementsByTagName("msnenabled")[0];
+                    if (chkMSN.Checked)
+                        msnNode.InnerText = "true";
+                    else
+                        msnNode.InnerText = "false";
+
                     settingsXml.Save("settings.mpc");
                 }
                 catch (XmlException xe)
                 {
                     Console.WriteLine(xe.ToString());
+                }
+
+                // Trigger main form event
+                if (SettingsChanged != null)
+                {
+                    SettingsChanged(this, e);
                 }
 
             }
@@ -219,6 +232,11 @@ namespace Music
         }
 
         private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            settingsChanged = true;
+        }
+
+        private void chkMSN_CheckedChanged(object sender, EventArgs e)
         {
             settingsChanged = true;
         }

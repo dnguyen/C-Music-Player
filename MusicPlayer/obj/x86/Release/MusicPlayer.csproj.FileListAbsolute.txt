@@ -18,3 +18,4 @@ G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Release\policy.2.0.ta
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\Music.SettingsForm.resources
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Release\MusicPlayer.exe.config
 G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\bin\Release\lastfm-sharp.dll
+G:\Dropbox\Dropbox\Programming\MusicPlayer\MusicPlayer\obj\x86\Release\Music.frmEditSong.resources

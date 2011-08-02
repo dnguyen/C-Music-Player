@@ -35,11 +35,14 @@
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colArtist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colAlbum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1 = new System.Windows.Forms.Label();
+            this.contextSong = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.playToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.editPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblCurrentSong = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openYouTubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.controlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,16 +58,16 @@
             this.btnCloseSearch = new System.Windows.Forms.Button();
             this.songDuration = new System.Windows.Forms.ProgressBar();
             this.timerSongDuration = new System.Windows.Forms.Timer(this.components);
-            this.playToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.editPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextSong = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openYouTubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblSongDuration = new System.Windows.Forms.Label();
             this.imgAlbumArt = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblCurrentTime = new System.Windows.Forms.Label();
+            this.panelTiming = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.contextSong.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAlbumArt)).BeginInit();
+            this.panelTiming.SuspendLayout();
             this.SuspendLayout();
             // 
             // player
@@ -93,6 +96,8 @@
             this.listMusic.TabIndex = 2;
             this.listMusic.UseCompatibleStateImageBehavior = false;
             this.listMusic.View = System.Windows.Forms.View.Details;
+            this.listMusic.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listMusic_ColumnClick);
+            this.listMusic.SelectedIndexChanged += new System.EventHandler(this.listMusic_SelectedIndexChanged);
             this.listMusic.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listMusic_MouseDoubleClick);
             // 
             // colTitle
@@ -110,21 +115,35 @@
             this.colAlbum.Text = "Album";
             this.colAlbum.Width = 150;
             // 
-            // label1
+            // contextSong
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(92, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Currently Playing:";
+            this.contextSong.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.playToolStripMenuItem1,
+            this.editPropertiesToolStripMenuItem});
+            this.contextSong.Name = "contextSong";
+            this.contextSong.Size = new System.Drawing.Size(151, 48);
+            // 
+            // playToolStripMenuItem1
+            // 
+            this.playToolStripMenuItem1.Name = "playToolStripMenuItem1";
+            this.playToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
+            this.playToolStripMenuItem1.Text = "Play";
+            this.playToolStripMenuItem1.Click += new System.EventHandler(this.playToolStripMenuItem1_Click);
+            // 
+            // editPropertiesToolStripMenuItem
+            // 
+            this.editPropertiesToolStripMenuItem.Name = "editPropertiesToolStripMenuItem";
+            this.editPropertiesToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.editPropertiesToolStripMenuItem.Text = "Edit Properties";
+            this.editPropertiesToolStripMenuItem.Click += new System.EventHandler(this.editPropertiesToolStripMenuItem_Click);
             // 
             // lblCurrentSong
             // 
             this.lblCurrentSong.AutoSize = true;
-            this.lblCurrentSong.Location = new System.Drawing.Point(181, 49);
+            this.lblCurrentSong.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentSong.Location = new System.Drawing.Point(92, 50);
             this.lblCurrentSong.Name = "lblCurrentSong";
-            this.lblCurrentSong.Size = new System.Drawing.Size(0, 13);
+            this.lblCurrentSong.Size = new System.Drawing.Size(0, 18);
             this.lblCurrentSong.TabIndex = 5;
             // 
             // menuStrip1
@@ -155,6 +174,12 @@
             this.openToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
+            // openYouTubeToolStripMenuItem
+            // 
+            this.openYouTubeToolStripMenuItem.Name = "openYouTubeToolStripMenuItem";
+            this.openYouTubeToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.openYouTubeToolStripMenuItem.Text = "Open YouTube";
+            // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -184,33 +209,34 @@
             // playToolStripMenuItem
             // 
             this.playToolStripMenuItem.Name = "playToolStripMenuItem";
-            this.playToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.playToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.playToolStripMenuItem.Text = "Play";
             this.playToolStripMenuItem.Click += new System.EventHandler(this.playToolStripMenuItem_Click);
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.stopToolStripMenuItem.Text = "Stop";
             this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
             // pauseToolStripMenuItem
             // 
             this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.pauseToolStripMenuItem.Text = "Pause";
+            this.pauseToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem_Click);
             // 
             // nextToolStripMenuItem
             // 
             this.nextToolStripMenuItem.Name = "nextToolStripMenuItem";
-            this.nextToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nextToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.nextToolStripMenuItem.Text = "Next";
             // 
             // previousToolStripMenuItem
             // 
             this.previousToolStripMenuItem.Name = "previousToolStripMenuItem";
-            this.previousToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.previousToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.previousToolStripMenuItem.Text = "Previous";
             // 
             // optionsToolStripMenuItem
@@ -268,40 +294,17 @@
             this.timerSongDuration.Interval = 1000;
             this.timerSongDuration.Tick += new System.EventHandler(this.timerSongDuration_Tick);
             // 
-            // playToolStripMenuItem1
-            // 
-            this.playToolStripMenuItem1.Name = "playToolStripMenuItem1";
-            this.playToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
-            this.playToolStripMenuItem1.Text = "Play";
-            this.playToolStripMenuItem1.Click += new System.EventHandler(this.playToolStripMenuItem1_Click);
-            // 
-            // editPropertiesToolStripMenuItem
-            // 
-            this.editPropertiesToolStripMenuItem.Name = "editPropertiesToolStripMenuItem";
-            this.editPropertiesToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.editPropertiesToolStripMenuItem.Text = "Edit Properties";
-            // 
-            // contextSong
-            // 
-            this.contextSong.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.playToolStripMenuItem1,
-            this.editPropertiesToolStripMenuItem});
-            this.contextSong.Name = "contextSong";
-            this.contextSong.Size = new System.Drawing.Size(151, 48);
-            // 
-            // openYouTubeToolStripMenuItem
-            // 
-            this.openYouTubeToolStripMenuItem.Name = "openYouTubeToolStripMenuItem";
-            this.openYouTubeToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.openYouTubeToolStripMenuItem.Text = "Open YouTube";
-            // 
             // lblSongDuration
             // 
             this.lblSongDuration.AutoSize = true;
-            this.lblSongDuration.Location = new System.Drawing.Point(550, 41);
+            this.lblSongDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSongDuration.Location = new System.Drawing.Point(51, 0);
             this.lblSongDuration.Name = "lblSongDuration";
-            this.lblSongDuration.Size = new System.Drawing.Size(0, 13);
+            this.lblSongDuration.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblSongDuration.Size = new System.Drawing.Size(36, 18);
             this.lblSongDuration.TabIndex = 14;
+            this.lblSongDuration.Text = "0:00";
+            this.lblSongDuration.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // imgAlbumArt
             // 
@@ -314,12 +317,46 @@
             this.imgAlbumArt.TabIndex = 15;
             this.imgAlbumArt.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(38, 0);
+            this.label1.Name = "label1";
+            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label1.Size = new System.Drawing.Size(12, 18);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "/";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblCurrentTime
+            // 
+            this.lblCurrentTime.AutoSize = true;
+            this.lblCurrentTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentTime.Location = new System.Drawing.Point(2, 0);
+            this.lblCurrentTime.Name = "lblCurrentTime";
+            this.lblCurrentTime.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblCurrentTime.Size = new System.Drawing.Size(36, 18);
+            this.lblCurrentTime.TabIndex = 14;
+            this.lblCurrentTime.Text = "0:00";
+            this.lblCurrentTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panelTiming
+            // 
+            this.panelTiming.Controls.Add(this.lblCurrentTime);
+            this.panelTiming.Controls.Add(this.label1);
+            this.panelTiming.Controls.Add(this.lblSongDuration);
+            this.panelTiming.Location = new System.Drawing.Point(498, 53);
+            this.panelTiming.Name = "panelTiming";
+            this.panelTiming.Size = new System.Drawing.Size(87, 19);
+            this.panelTiming.TabIndex = 16;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(597, 357);
-            this.Controls.Add(this.lblSongDuration);
+            this.Controls.Add(this.panelTiming);
             this.Controls.Add(this.imgAlbumArt);
             this.Controls.Add(this.player);
             this.Controls.Add(this.songDuration);
@@ -329,16 +366,17 @@
             this.Controls.Add(this.listMusic);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.lblCurrentSong);
-            this.Controls.Add(this.label1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "Music Player";
             this.Resize += new System.EventHandler(this.frmMain_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
+            this.contextSong.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.contextSong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imgAlbumArt)).EndInit();
+            this.panelTiming.ResumeLayout(false);
+            this.panelTiming.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,7 +389,6 @@
         private System.Windows.Forms.ColumnHeader colTitle;
         private System.Windows.Forms.ColumnHeader colArtist;
         private System.Windows.Forms.ColumnHeader colAlbum;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblCurrentSong;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -377,6 +414,9 @@
         private System.Windows.Forms.ToolStripMenuItem openYouTubeToolStripMenuItem;
         private System.Windows.Forms.Label lblSongDuration;
         private System.Windows.Forms.PictureBox imgAlbumArt;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblCurrentTime;
+        private System.Windows.Forms.Panel panelTiming;
     }
 }
 
